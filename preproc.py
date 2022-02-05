@@ -1,4 +1,3 @@
-from curses import raw
 import glob
 import json
 import os
@@ -10,8 +9,6 @@ def clean_FE(raw_FE):
     FE=re.sub(r'( math-)+ ', ' [MATH] ', ' '+FE+' ')
     FE=re.sub(r'\d+', '[N]', FE.strip())
     return FE  
-
-
 
 def main(dir_path, out_path, minimum_frequency=3):
     FEs={} # FEs[discipline][CF][FE]=sum_freq
@@ -34,7 +31,6 @@ def main(dir_path, out_path, minimum_frequency=3):
                 FEs[discipline][CF]={k:v for k, v in FEs[discipline][CF].items() if v >= minimum_frequency}
     with open(out_path, mode='w') as f:
         json.dump(FEs, f, ensure_ascii=False, indent="\t")
-
 
 if __name__=='__main__':
     if len(sys.argv)!=4:

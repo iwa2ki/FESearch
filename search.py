@@ -1,4 +1,3 @@
-from dis import dis
 import json
 import re
 import sys

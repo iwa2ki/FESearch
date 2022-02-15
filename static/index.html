@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="/static/script.js"></script>
+        <link rel="stylesheet" href="https://use.typekit.net/gps1qkd.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <title>KTTA Scientific Phrases</title>
+    </head>
+    <body onload="ready()">
+        <header id="header">
+            <h1>KTTA Scientific Phrases</h1>
+        </header>
+        <main>
+            <form onsubmit="search();return false;">
+                <select name="discipline" id="discipline">
+                    <option value="a">Biomedicine</option>
+                    <option value="b">Chemistry</option>
+                    <option value="c">Computer Science</option>
+                    <option value="d">Psychology</option>
+                </select>
+                <input type="text" name="q" id="q" placeholder="Input a phrase">
+                <input type="submit" id="button" value="Search">
+            </form>
+            <table id="results"></table>
+        </main>
+        <footer>
+            ©2022 KTTA. <a href="/static/terms.html">Terms of Use &amp; Privacy Policy<span lang="ja">（利用規約・個人情報）</span></a>
+        </footer>
+    </body>
+</html>

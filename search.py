@@ -18,12 +18,14 @@ class Search:
     def calc_similarity(self, fe1, fe2, max_similarity=1.0):
         words={}
         for w in fe1.split(' '):
-            words[w]=1
+            if w!='*':
+                words[w]=1
         for w in fe2.split(' '):
             if w in words:
                 words[w]=2
             else:
-                words[w]=1
+                if w!='*':
+                    words[w]=1
         intersection=[w for w in words if words[w]==2]
         if len(words)!=0:
             similarity=len(intersection)/len(words)
@@ -34,6 +36,8 @@ class Search:
 
     def search(self, discipline, q, topN=10):
         q=self.clean_query(q)
+        if q=='':
+            return ('', 0.0, [])
         max_CF=(None, 0.0, []) # CF, similarity
         for CF in self.FEs[discipline]:
             if len(self.FEs[discipline][CF])==0:
@@ -46,6 +50,8 @@ class Search:
                 if candidates[FE]>max_sim:
                     max_sim=candidates[FE]
             if max_sim>max_CF[1]:
+                if max_sim!=1.0:
+                    threshold=1.0
                 topN_FEs=sorted(candidates, reverse=True, key=lambda x: candidates[x] if candidates[x]<=threshold else 0)[:topN]
                 max_CF=(CF, max_sim, topN_FEs)
         return max_CF

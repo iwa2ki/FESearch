@@ -1,15 +1,14 @@
 import json
+import os
 import sys
 
 import responder
 
 import search
 
-def main(config_file):
-    with open(config_file) as f:
-        config=json.load(f)
+def main(config):
     api=responder.API(secret_key=config['secret_key'], templates_dir=config['templates'], static_dir=config['static'])
-    retriever=search.Search(data_path=config['data'], config_path=config['threshold'])
+    retriever=search.Search(data_path=config['data'], config_path=config['threshold'], sentences_path=config['sentences'])
 
     @api.route('/')
     def top(request, response):
@@ -25,9 +24,17 @@ def main(config_file):
         else:
             results=[]
         response.media={'results': results}
+    return api
 
-    api.run(address=config['address'], port=config['port'])
-
+def get_config(config_file):
+    with open(config_file) as f:
+        config=json.load(f)
+    return config
 
 if __name__=='__main__':
-    main(sys.argv[1])
+    config=get_config(sys.argv[1])
+    api=main(config)
+    api.run(address=config['address'], port=config['port'])
+else:
+    config=get_config(os.environ['FECONFIG'])
+    api=main(config)

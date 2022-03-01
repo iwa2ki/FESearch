@@ -47,11 +47,83 @@
         position: absolute;
         bottom: 0px;
         right: 0px;
-        height:32px;
+        height: 48px;
         text-align: center;
         font-size: 10pt;
         background-color: #ffffff;
         color: #333333;
+    }
+    footer a{
+        color: #333333;
+    }
+}
+
+@media screen and (max-width:799px){
+    body{
+        font-family: brother-1816;
+        margin: 0;
+        padding: 0;
+    }
+    h1{
+        display: none;
+    }
+    main{
+        margin: 0;
+    }
+    main form{
+        text-align: center;
+    }
+    #discipline{
+        width: 100%;
+        display: block;
+        border: solid 1px #808080;
+        border-radius: 2px;
+    }
+    #q{
+        display: block;
+        width: calc(100% - 104px);
+        font-size: 16pt;
+        font-family: brother-1816;
+        margin: 1px 0px;
+        float: left;
+        border: solid 1px #808080;
+        border-radius: 2px;
+        padding: 1px;
+    }
+    #button{
+        border: solid 1px #808080;
+        width: 100px;
+        margin: 1px 0px;
+        padding: 1px;
+        clear: both;
+        border-radius: 2px;
+    }
+    input, select{
+        font-size: 16pt;
+        font-family: brother-1816;
+    }
+    table{
+        border: none;
+        width: 100%;
+        margin: 20px auto;
+        font-size: 16pt;
+    }
+    tr:nth-child(even){
+        background-color: #c1cfce;
+        color: #000000;
+    }
+    tr:nth-child(odd){
+        background-color: #d7e5d1;
+        color: #000000;
+    }
+    td{
+        padding-left: 8px;
+    }
+    footer{
+        text-align: center;
+        font-size: 10pt;
+        color: #333333;
+        margin-top: 100px;
     }
     footer a{
         color: #333333;

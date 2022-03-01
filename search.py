@@ -3,11 +3,13 @@ import re
 import sys
 
 class Search:
-    def __init__(self, data_path, config_path):
+    def __init__(self, data_path, config_path, sentences_path):
         with open(data_path) as f:
             self.FEs=json.load(f)
         with open(config_path) as f:
             self.threshold=json.load(f)
+        with open(sentences_path) as f:
+            self.sentences=json.load(f)
     
     def clean_query(self, q):
         q=q.strip()
@@ -34,6 +36,16 @@ class Search:
             return similarity
         return 0
 
+    def make_pairs(self, FEs, discipline):
+        pairs=[]
+        for FE in FEs:
+            if FE in self.sentences[discipline]:
+                pairs.append({
+                    'FE': FE,
+                    'sentences': [{'sentence': s['sentence'], 'uri': s['uri']} for s in self.sentences[discipline][FE]]
+                })
+        return pairs
+
     def search(self, discipline, q, topN=10):
         q=self.clean_query(q)
         if q=='':
@@ -53,6 +65,6 @@ class Search:
                 if max_sim!=1.0:
                     threshold=1.0
                 topN_FEs=sorted(candidates, reverse=True, key=lambda x: candidates[x] if candidates[x]<=threshold else 0)[:topN]
-                max_CF=(CF, max_sim, topN_FEs)
+                max_CF=(CF, max_sim, self.make_pairs(topN_FEs, discipline))
         return max_CF
         

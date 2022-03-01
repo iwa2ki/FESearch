@@ -9,10 +9,13 @@ async function search(){
         'body': JSON.stringify({'q': q, 'discipline': d})
     });
     let results=await response.json();
+    console.log(results)
     while(document.getElementById('results').firstChild){
         document.getElementById('results').removeChild(document.getElementById('results').firstChild);
     }
-    for(fe of results.results){
+    for(item of results.results){
+        let fe=item.FE;
+        let sentences=item.sentences;
         let tr=document.createElement('tr');
         let td1=document.createElement('td');
         td1.appendChild(document.createTextNode(fe));

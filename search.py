@@ -1,6 +1,5 @@
 import json
 import re
-import sys
 
 class Search:
     def __init__(self, data_path, config_path, sentences_path):
@@ -42,7 +41,7 @@ class Search:
             if FE in self.sentences[discipline]:
                 pairs.append({
                     'FE': FE,
-                    'sentences': [{'sentence': s['sentence'], 'uri': s['uri']} for s in self.sentences[discipline][FE]]
+                    'sentences': [{'sentence': s['sentence'], 'uri': s['uri']} for s in self.sentences[discipline][FE]][:5]
                 })
         return pairs
 

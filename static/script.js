@@ -19,13 +19,23 @@ async function search(){
         let tr=document.createElement('tr');
         let td1=document.createElement('td');
         td1.appendChild(document.createTextNode(fe));
+        let ul=document.createElement('ul');
+        for(sentence of sentences){
+            let li=document.createElement('li');
+            li.appendChild(document.createTextNode(sentence.sentence));
+            let link=document.createElement('a');
+            link.href=sentence.uri+'#:~:text='+encodeURIComponent(sentence.sentence);
+            link.textContent='[source]';
+            link.target='_blank';
+            li.appendChild(link);
+            ul.appendChild(li);
+        }
+        ul.style.display='none';
+        td1.appendChild(ul);
         tr.appendChild(td1);
         let td2=document.createElement('td');
-        let a=document.createElement('a');
-        a.appendChild(document.createTextNode('Examples'));
-        a.target='_blank';
-        a.href='https://scholar.google.com/scholar?q=%22'+fe.replace(/ /g, '+')+'%22';
-        td2.appendChild(a);
+        td2.textContent='⏬';
+        td2.addEventListener('click', function(){if(ul.style.display=='none'){ul.style.display='block';this.textContent='⏫';}else{ul.style.display='none';this.textContent='⏬'}});
         tr.appendChild(td2);
         document.getElementById('results').appendChild(tr);
     }

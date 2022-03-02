@@ -13,6 +13,7 @@ class Search:
     def clean_query(self, q):
         q=q.strip()
         q=re.sub(r'[ 　]{2,}', ' ', q)
+        q=re.sub(r'[^ a-zA-Z0-9\-_]', '', q)
         q=q.lower()
         return q
 
